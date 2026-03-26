@@ -1,0 +1,36 @@
+{
+  "eval_id": 2,
+  "run_id": "csv-export-without_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": false,
+      "evidence": "The document contains HLD (§2), LLD (§3), and Implementation Plan (§4), but there is no EARS requirements plan section. §1 is a standard tabular requirements section using FR/NFR IDs with plain English descriptions, not EARS syntax."
+    },
+    {
+      "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": false,
+      "evidence": "No EARS-formatted requirements exist anywhere in the document. Requirements in §1 use a table format with IDs like FR-01 through FR-11 and plain English prose. No WHEN/WHILE/IF THEN/The system shall patterns are used."
+    },
+    {
+      "text": "HLD or LLD addresses the async job/queue architecture for handling large exports (not synchronous download)",
+      "passed": true,
+      "evidence": "§2.1 architecture diagram shows a Job Queue (SQS/RabbitMQ) and Export Worker. §2.3 explicitly diagrams the sync vs async decision. §3.3 details the Export Worker processing algorithm with queue polling and async job handling."
+    },
+    {
+      "text": "Documents address the large data concern (millions of rows) with specific strategies like streaming, chunking, or background jobs",
+      "passed": true,
+      "evidence": "FR-10 requires supporting 'at least 10 million rows in a single job'. NFR-01 targets 10-million-row exports within 30 minutes. §3.3 uses 50k-row batch streaming with cursor pagination. §3.4 explicitly describes memory-efficient streaming with multipart upload in 5MB parts."
+    },
+    {
+      "text": "Implementation plan or LLD covers email notification/link delivery when the export is ready",
+      "passed": true,
+      "evidence": "Milestone 4 (§4.5) is entirely dedicated to notifications, including 'sendExportReadyEmail(userId, downloadUrl, expiresAt, parameters)', HTML email templates with download buttons, and integration with email providers like SendGrid/SES. The LLD worker algorithm also calls 'notificationService.notify(job.userId, downloadUrl)'."
+    },
+    {
+      "text": "Implementation Plan includes a 'Definition of Done' section with completion criteria checklist",
+      "passed": false,
+      "evidence": "Each milestone has 'Acceptance Criteria' subsections (e.g., 'Acceptance Criteria' under M1-M6), but there is no dedicated 'Definition of Done' section with a unified completion criteria checklist for the overall feature or individual milestones."
+    }
+  ]
+}

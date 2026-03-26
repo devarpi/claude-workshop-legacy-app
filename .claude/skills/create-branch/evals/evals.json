@@ -1,0 +1,40 @@
+{
+  "skill_name": "create-branch",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "create a branch for the work I'm doing — adding dark mode support to the settings page",
+      "expected_output": "A git branch created with a descriptive name like feature/dark-mode-settings or similar, and confirmation that the user is now on that branch.",
+      "files": [],
+      "assertions": [
+        "Branch name contains 'dark' and 'mode' — correctly derived from user's description",
+        "Branch name is kebab-case (all lowercase, hyphen-separated)",
+        "Branch name includes a type prefix (feature/, feat/, or similar)",
+        "Branch was created without asking for unnecessary confirmation"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "branch this",
+      "expected_output": "The skill should gather context (git status, recent commits) to infer a reasonable branch name, then either create it directly if context is clear or ask for quick confirmation if ambiguous.",
+      "files": [],
+      "assertions": [
+        "Branch name relates to the auth work in context (contains 'auth', 'login', or 'token')",
+        "Branch name is kebab-case (all lowercase, hyphen-separated)",
+        "Branch name includes a type prefix",
+        "Agent gathers git context (runs git status or git diff) before proposing a name"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "make me a branch called payment-refactor",
+      "expected_output": "A git branch created with the exact name payment-refactor (or matching a prefix convention). No second-guessing the explicit name the user provided.",
+      "files": [],
+      "assertions": [
+        "Branch name preserves the user's explicit name 'payment-refactor'",
+        "git switch -c or git checkout -b command was actually executed",
+        "No unnecessary confirmation or name change was proposed"
+      ]
+    }
+  ]
+}

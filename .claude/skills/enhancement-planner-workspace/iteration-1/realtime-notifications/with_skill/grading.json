@@ -1,0 +1,36 @@
+{
+  "eval_id": 1,
+  "run_id": "realtime-notifications-with_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": true,
+      "evidence": "The document contains all four sections with clear headings: '## 1. HLD — High-Level Design' (line 5), '## 2. LLD — Low-Level Design' (line 123), '## 3. EARS — Requirements Plan' (line 422), and '## 4. Implementation Plan' (line 504)."
+    },
+    {
+      "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": true,
+      "evidence": "The EARS section contains 20+ numbered requirements using proper syntax: FR-2 uses 'WHEN', FR-4 uses 'WHILE', FR-12 uses 'IF...the system shall', FR-3 uses 'WHEN...the system shall', SR-2 uses 'WHEN', RR-1 uses 'IF...the system shall', and many use 'The system shall' directly (e.g., FR-1, FR-5, FR-9, PR-1, SR-1)."
+    },
+    {
+      "text": "HLD discusses the real-time delivery mechanism (WebSocket, SSE, or long-polling) with rationale for the choice",
+      "passed": true,
+      "evidence": "Section 4 'Key Design Decisions' of the HLD explicitly states: 'WebSocket transport | Django Channels + Redis channel layer | Native Django ecosystem; scales horizontally; well-documented'. It also includes a dedicated trade-off section: 'Trade-off: WebSockets vs. Server-Sent Events (SSE)' explaining why WebSockets were chosen over SSE (bidirectionality, extensibility)."
+    },
+    {
+      "text": "Documents cover all three notification trigger types mentioned: comment on post, like, and direct message",
+      "passed": true,
+      "evidence": "All three types are covered throughout: HLD section 1 mentions 'when someone comments on their post, likes their content, or sends them a direct message'; the Notification model defines TYPE_CHOICES with COMMENT, LIKE, DIRECT_MESSAGE; FR-14 states 'The system shall support the following notification types: comment, like, and direct_message'; and Phase 2 tasks include signal handlers for all three."
+    },
+    {
+      "text": "LLD includes a notification data model/schema (fields like user_id, type, content, read_at, created_at etc.)",
+      "passed": true,
+      "evidence": "LLD Section 2 'Data Model Changes' provides both a full SQL CREATE TABLE statement and a Django model class. Fields include: id, recipient_id, actor_id, notification_type, target_ct_id, target_object_id, data (JSONB), is_read, read_at, and created_at — covering all expected fields."
+    },
+    {
+      "text": "Implementation Plan is broken into at least 3 distinct phases with tasks in each",
+      "passed": true,
+      "evidence": "The Implementation Plan defines 4 distinct phases: 'Phase 1 – Foundation' (8 tasks), 'Phase 2 – Core Backend Logic' (8 tasks), 'Phase 3 – WebSocket Consumer + React Integration' (11 tasks), and 'Phase 4 – Polish, Testing & Deployment' (10 tasks), all with checkbox task lists."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "eval_id": 2,
+  "run_id": "csv-export-with_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": true,
+      "evidence": "The document contains clearly delineated sections: '## 1. HLD — High-Level Design', '## 2. LLD — Low-Level Design', '## 3. EARS — Requirements Plan', and '## 4. Implementation Plan'."
+    },
+    {
+      "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": true,
+      "evidence": "The EARS section contains 35 numbered requirements across FR, PR, SR, RR, and UR categories. Examples: 'FR-2: WHEN a user initiates an export, the system shall allow the user to specify a start date and end date', 'FR-10: WHILE an export job is processing, the system shall query the analytics data in configurable batches', 'FR-6: IF an export request fails validation THEN the system shall return a descriptive error message'."
+    },
+    {
+      "text": "HLD or LLD addresses the async job/queue architecture for handling large exports (not synchronous download)",
+      "passed": true,
+      "evidence": "HLD Section 3 includes a detailed architecture diagram showing a Job Queue (e.g., Redis/SQS/Celery/BullMQ) and Export Worker. HLD Section 4 states: 'Large exports cannot be served synchronously... A job queue decouples the export request from execution'. LLD Section 1.2 describes the Export Worker in detail."
+    },
+    {
+      "text": "Documents address the large data concern (millions of rows) with specific strategies like streaming, chunking, or background jobs",
+      "passed": true,
+      "evidence": "HLD Section 4 states 'The worker queries analytics data in configurable batch sizes (e.g., 10,000 rows per query) to avoid loading millions of rows into memory at once.' LLD Section 1.2 shows cursor-based batching pseudocode with BATCH_SIZE. LLD Section 3 describes cursor-based pagination to avoid OFFSET degradation at large offsets. NFR states 'Worker batching must keep memory usage per worker below 512 MB'."
+    },
+    {
+      "text": "Implementation plan or LLD covers email notification/link delivery when the export is ready",
+      "passed": true,
+      "evidence": "LLD Section 1.6 defines an ExportEmailService interface with sendCompletionEmail and sendFailureEmail methods. The worker pseudocode in LLD 1.2 calls 'sendCompletionEmail(job.user_email, signed_url)'. EARS FR-13 requires: 'WHEN an export job completes successfully, the system shall send the user an email containing the pre-signed download URL and the expiry time.' Phase 3 task list includes 'Implement ExportEmailService (completion email, failure email with templates)'."
+    },
+    {
+      "text": "Implementation Plan includes a 'Definition of Done' section with completion criteria checklist",
+      "passed": true,
+      "evidence": "Implementation Plan Section 5 is titled 'Definition of Done' and contains a checklist of 10 items including: unit tests passing with >= 80% coverage, integration tests passing in CI, load test criteria, security review, feature flag gating, staging QA walkthrough, observability metrics, API documentation, code review approval, and product/design sign-off."
+    }
+  ]
+}

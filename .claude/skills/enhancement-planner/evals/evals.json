@@ -1,0 +1,119 @@
+{
+  "skill_name": "enhancement-planner",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I want to add rate limiting to our REST API. Right now we have a Node.js/Express app with no rate limiting at all, and we're getting hammered by some clients making thousands of requests per minute. I need to limit each API key to 1000 requests per hour, return proper 429 errors, and have a way to check current usage. Can you create the planning docs for this?",
+      "expected_output": "HLD covering architecture of rate limiting middleware, LLD with Redis/in-memory store design, token bucket or sliding window algorithm, EARS requirements with FR/PR/SR numbered items, and an implementation plan with phased tasks",
+      "files": [],
+      "assertions": [
+        {
+          "id": "has-all-four-sections",
+          "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+          "type": "structural"
+        },
+        {
+          "id": "ears-numbered-requirements",
+          "text": "EARS section contains numbered requirements (e.g. FR-1, PR-1, SR-1) using proper EARS syntax templates (WHEN/WHILE/IF THEN/The system shall)",
+          "type": "format"
+        },
+        {
+          "id": "implementation-plan-checklist",
+          "text": "Implementation Plan includes a phased checklist with actionable tasks (starting with verbs like Create, Implement, Write, Add)",
+          "type": "format"
+        },
+        {
+          "id": "rate-limit-specifics",
+          "text": "Documents address the specific requirements: 1000 req/hour limit, 429 error responses, and a usage-check mechanism",
+          "type": "content"
+        },
+        {
+          "id": "lld-algorithm-detail",
+          "text": "LLD includes discussion of rate-limiting algorithm (e.g. sliding window, token bucket, fixed window) with data structure details",
+          "type": "content"
+        },
+        {
+          "id": "risk-assessment-present",
+          "text": "Implementation Plan includes a risk assessment section with at least 2 risks identified",
+          "type": "content"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "We need to add real-time notifications to our web app. Users should get notified when someone comments on their post, likes their content, or sends them a direct message. We're using a Python/Django backend and React frontend. The notifications should appear as a bell icon with a badge count. Help me plan this out end-to-end.",
+      "expected_output": "HLD with WebSocket or SSE architecture decision, LLD with notification data model and delivery mechanism, EARS requirements covering notification triggers and delivery guarantees, implementation plan broken into phases",
+      "files": [],
+      "assertions": [
+        {
+          "id": "has-all-four-sections",
+          "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+          "type": "structural"
+        },
+        {
+          "id": "ears-numbered-requirements",
+          "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+          "type": "format"
+        },
+        {
+          "id": "hld-architecture-decision",
+          "text": "HLD discusses the real-time delivery mechanism (WebSocket, SSE, or long-polling) with rationale for the choice",
+          "type": "content"
+        },
+        {
+          "id": "notification-triggers-covered",
+          "text": "Documents cover all three notification trigger types mentioned: comment on post, like, and direct message",
+          "type": "content"
+        },
+        {
+          "id": "lld-data-model",
+          "text": "LLD includes a notification data model/schema (fields like user_id, type, content, read_at, created_at etc.)",
+          "type": "content"
+        },
+        {
+          "id": "implementation-phases",
+          "text": "Implementation Plan is broken into at least 3 distinct phases with tasks in each",
+          "type": "format"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need to add an export to CSV feature for our analytics dashboard. Users have been asking for this for months. They should be able to select a date range, pick which metrics they want exported, and download a CSV file. We have a lot of data — some exports could have millions of rows — so it needs to handle large exports gracefully, probably with async processing and an email link when ready.",
+      "expected_output": "HLD with async job queue architecture, LLD with job model, CSV generation logic, email delivery, EARS requirements including async behavior and error handling, phased implementation plan with tasks",
+      "files": [],
+      "assertions": [
+        {
+          "id": "has-all-four-sections",
+          "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+          "type": "structural"
+        },
+        {
+          "id": "ears-numbered-requirements",
+          "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+          "type": "format"
+        },
+        {
+          "id": "async-job-architecture",
+          "text": "HLD or LLD addresses the async job/queue architecture for handling large exports (not synchronous download)",
+          "type": "content"
+        },
+        {
+          "id": "large-export-handling",
+          "text": "Documents address the large data concern (millions of rows) with specific strategies like streaming, chunking, or background jobs",
+          "type": "content"
+        },
+        {
+          "id": "email-delivery-covered",
+          "text": "Implementation plan or LLD covers email notification/link delivery when the export is ready",
+          "type": "content"
+        },
+        {
+          "id": "definition-of-done",
+          "text": "Implementation Plan includes a 'Definition of Done' section with completion criteria checklist",
+          "type": "format"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "query": "I want to add OAuth2 login to my app — can you help me plan it out? We have a Rails backend and I need to figure out the architecture, data model, and what order to build things in",
+    "should_trigger": true
+  },
+  {
+    "query": "our product team wants a bulk email feature — users can select a segment and send a campaign. We use Django + Celery. Need to think through the design before we start coding",
+    "should_trigger": true
+  },
+  {
+    "query": "I need an HLD and LLD for adding a recommendation engine to our e-commerce site. Collaborative filtering or content-based — haven't decided yet",
+    "should_trigger": true
+  },
+  {
+    "query": "write requirements for a multi-tenant billing system. We need to support different pricing tiers, proration, and Stripe integration",
+    "should_trigger": true
+  },
+  {
+    "query": "help me think through how to build a file upload feature — drag and drop, progress bar, S3 storage, virus scan before saving. What's the right architecture?",
+    "should_trigger": true
+  },
+  {
+    "query": "we're adding dark mode to our React app, need to plan the feature before implementing",
+    "should_trigger": true
+  },
+  {
+    "query": "create a spec for adding full-text search to our blog platform — we're on PostgreSQL, considering pg_trgm or switching to Elasticsearch",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to add X to my system — specifically audit logging so we can track every write operation with user/timestamp/diff",
+    "should_trigger": true
+  },
+  {
+    "query": "design this enhancement: migrate our monolith authentication to a dedicated auth service with JWT. Need to think through backwards compatibility",
+    "should_trigger": true
+  },
+  {
+    "query": "how should I build a webhook delivery system? Need retry logic, signature verification, and a dashboard for users to see delivery history",
+    "should_trigger": true
+  },
+  {
+    "query": "can you fix this bug in my auth middleware? It's throwing a 500 when the JWT is expired instead of returning 401",
+    "should_trigger": false
+  },
+  {
+    "query": "explain how React's useEffect hook works and when to use cleanup functions",
+    "should_trigger": false
+  },
+  {
+    "query": "write unit tests for this UserService class — I need coverage for the createUser and deleteUser methods",
+    "should_trigger": false
+  },
+  {
+    "query": "refactor this Python function to use async/await instead of callbacks",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the difference between WebSockets and Server-Sent Events?",
+    "should_trigger": false
+  },
+  {
+    "query": "I have a CSV with 50k rows of customer data and need to import it into my PostgreSQL database — can you write a script to do that?",
+    "should_trigger": false
+  },
+  {
+    "query": "my Docker container keeps OOMing in prod, here's the memory profile — help me figure out what's leaking",
+    "should_trigger": false
+  },
+  {
+    "query": "can you review this pull request? It adds a new payments endpoint and I want feedback on the error handling",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to add pagination to an existing API endpoint that currently returns all results — just the code change, nothing fancy",
+    "should_trigger": false
+  },
+  {
+    "query": "update our README to document the new environment variables we added last week",
+    "should_trigger": false
+  }
+]

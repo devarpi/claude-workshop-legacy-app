@@ -1,0 +1,36 @@
+{
+  "eval_id": 1,
+  "run_id": "realtime-notifications-without_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": false,
+      "evidence": "The document contains HLD (## High-Level Design), LLD (## Low-Level Design), and Implementation Plan (## Implementation Plan), but does NOT contain an EARS requirements plan. The requirements section (## Requirements) uses FR-1.x style numbering without EARS syntax (WHEN/WHILE/IF THEN/The system shall), so the EARS section is missing."
+    },
+    {
+      "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": false,
+      "evidence": "No EARS-formatted requirements exist anywhere in the document. The Requirements section uses plain functional requirement notation (e.g., 'FR-1.1 — A notification is created when another user comments on the authenticated user's post.') without any EARS keywords such as WHEN, WHILE, IF...THEN, or 'The system shall'."
+    },
+    {
+      "text": "HLD discusses the real-time delivery mechanism (WebSocket, SSE, or long-polling) with rationale for the choice",
+      "passed": true,
+      "evidence": "The HLD 'Key Technology Choices' table explicitly states: 'Real-time transport | Django Channels + WebSockets | Native Django integration; bidirectional; widely supported'. The architecture diagram and data flow section further elaborate on the WebSocket-based delivery path."
+    },
+    {
+      "text": "Documents cover all three notification trigger types mentioned: comment on post, like, and direct message",
+      "passed": true,
+      "evidence": "All three triggers are documented: FR-1.1 (comment on post), FR-1.2 (like), FR-1.3 (direct message). Signal handlers for all three are also shown in LLD section 6: on_comment_created, on_like_created, on_dm_sent."
+    },
+    {
+      "text": "LLD includes a notification data model/schema (fields like user_id, type, content, read_at, created_at etc.)",
+      "passed": true,
+      "evidence": "LLD Section 1 'Database Schema' includes a full SQL CREATE TABLE with fields: id (UUID), recipient_id, actor_id, verb, target_type, target_id, target_url, description, is_read, created_at, read_at. The Django model in Section 2 mirrors this schema."
+    },
+    {
+      "text": "Implementation Plan is broken into at least 3 distinct phases with tasks in each",
+      "passed": true,
+      "evidence": "The Implementation Plan has 6 distinct phases: Phase 1 (Backend Foundation, Days 1-4), Phase 2 (WebSocket Layer, Days 5-7), Phase 3 (Frontend Core, Days 8-11), Phase 4 (Integration & Polish, Days 12-14), Phase 5 (Testing & Hardening, Days 15-17), Phase 6 (Deployment Prep, Day 18). Each phase has a table of tasks with day-by-day breakdown."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "eval_id": 0,
+  "run_id": "rate-limiting-api-without_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": false,
+      "evidence": "The document contains sections for Requirements (§1), High-Level Design (§2), Low-Level Design (§3), and Implementation Plan (§4), but there is no dedicated EARS requirements section. The requirements in §1 use a plain table format with FR/NFR IDs, not EARS syntax (WHEN/WHILE/IF THEN/The system shall). EARS is entirely absent as a distinct section."
+    },
+    {
+      "text": "EARS section contains numbered requirements (e.g. FR-1, PR-1, SR-1) using proper EARS syntax templates (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": false,
+      "evidence": "No EARS syntax is used anywhere in the document. Requirements in §1 are numbered (FR-01 through FR-07, NFR-01 through NFR-06) but are written in plain prose, not using EARS templates such as 'WHEN', 'WHILE', 'IF...THEN', or 'The system shall'."
+    },
+    {
+      "text": "Implementation Plan includes a phased checklist with actionable tasks (starting with verbs like Create, Implement, Write, Add)",
+      "passed": true,
+      "evidence": "§4.1 contains five named phases (Phase 1–5) with tasks starting with action verbs: 'Provision Redis instance', 'Add ioredis npm dependency', 'Create RedisClient singleton module', 'Implement RateLimitService.increment()', 'Write integration test scaffold', 'Implement rateLimitMiddleware', 'Add structured logging', etc."
+    },
+    {
+      "text": "Documents address the specific requirements: 1000 req/hour limit, 429 error responses, and a usage-check mechanism",
+      "passed": true,
+      "evidence": "FR-01 specifies '1,000 requests per rolling 60-minute window'; FR-02 specifies 'HTTP 429 Too Many Requests'; FR-04 specifies a dedicated endpoint GET /rate-limit/status for querying current usage without consuming quota. The 429 response body in §3.7 also shows 'limit: 1000'."
+    },
+    {
+      "text": "LLD includes discussion of rate-limiting algorithm (e.g. sliding window, token bucket, fixed window) with data structure details",
+      "passed": true,
+      "evidence": "§3.1 explicitly chooses a sliding window algorithm using Redis Sorted Sets (ZSET), explaining 'A sorted set enables true sliding-window semantics. We prune entries older than now - windowMs before counting.' The Lua script in §3.3 shows the full algorithm implementation with ZREMRANGEBYSCORE, ZADD, ZCARD operations."
+    },
+    {
+      "text": "Implementation Plan includes a risk assessment section with at least 2 risks identified",
+      "passed": true,
+      "evidence": "§4.3 'Dependencies & Risks' contains a table with 5 identified risks: (1) Redis not provisioned/access blocked, (2) Existing clients break due to unexpected 429s, (3) Lua script incompatibility with Redis cluster mode, (4) Clock skew causes inconsistent window behavior, (5) Performance regression from Redis roundtrip."
+    }
+  ]
+}

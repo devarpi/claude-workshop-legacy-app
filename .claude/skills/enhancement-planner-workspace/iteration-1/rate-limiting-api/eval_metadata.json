@@ -1,0 +1,37 @@
+{
+  "eval_id": 0,
+  "eval_name": "rate-limiting-api",
+  "prompt": "I want to add rate limiting to our REST API. Right now we have a Node.js/Express app with no rate limiting at all, and we're getting hammered by some clients making thousands of requests per minute. I need to limit each API key to 1000 requests per hour, return proper 429 errors, and have a way to check current usage. Can you create the planning docs for this?",
+  "assertions": [
+    {
+      "id": "has-all-four-sections",
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "type": "structural"
+    },
+    {
+      "id": "ears-numbered-requirements",
+      "text": "EARS section contains numbered requirements (e.g. FR-1, PR-1, SR-1) using proper EARS syntax templates (WHEN/WHILE/IF THEN/The system shall)",
+      "type": "format"
+    },
+    {
+      "id": "implementation-plan-checklist",
+      "text": "Implementation Plan includes a phased checklist with actionable tasks (starting with verbs like Create, Implement, Write, Add)",
+      "type": "format"
+    },
+    {
+      "id": "rate-limit-specifics",
+      "text": "Documents address the specific requirements: 1000 req/hour limit, 429 error responses, and a usage-check mechanism",
+      "type": "content"
+    },
+    {
+      "id": "lld-algorithm-detail",
+      "text": "LLD includes discussion of rate-limiting algorithm (e.g. sliding window, token bucket, fixed window) with data structure details",
+      "type": "content"
+    },
+    {
+      "id": "risk-assessment-present",
+      "text": "Implementation Plan includes a risk assessment section with at least 2 risks identified",
+      "type": "content"
+    }
+  ]
+}

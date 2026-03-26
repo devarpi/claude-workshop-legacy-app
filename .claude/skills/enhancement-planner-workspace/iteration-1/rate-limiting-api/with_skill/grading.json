@@ -1,0 +1,36 @@
+{
+  "eval_id": 0,
+  "run_id": "rate-limiting-api-with_skill",
+  "expectations": [
+    {
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "passed": true,
+      "evidence": "The document contains all four clearly labeled sections: '## 1. HLD — High-Level Design' (line 5), '## 2. LLD — Low-Level Design' (line 113), '## 3. EARS — Requirements Plan' (line 336), and '## 4. Implementation Plan' (line 414)."
+    },
+    {
+      "text": "EARS section contains numbered requirements (e.g. FR-1, PR-1, SR-1) using proper EARS syntax templates (WHEN/WHILE/IF THEN/The system shall)",
+      "passed": true,
+      "evidence": "The EARS section contains numbered requirements including FR-1 through FR-12, PR-1 through PR-3, SR-1 through SR-4, RR-1 through RR-4, and UE-1 through UE-4. Proper EARS syntax is used throughout, e.g. 'WHEN a request is received, the system shall...' (FR-2), 'WHILE the application is starting, the system shall...' (FR-11), 'IF req.apiKey is not set..., THEN the system shall...' (FR-12), 'The system shall enforce...' (FR-1)."
+    },
+    {
+      "text": "Implementation Plan includes a phased checklist with actionable tasks (starting with verbs like Create, Implement, Write, Add)",
+      "passed": true,
+      "evidence": "The Implementation Plan Task Breakdown (section 4.2) includes four phases with checkbox items starting with action verbs: 'Create src/config/rateLimitConfig.js...', 'Add RATE_LIMIT_WINDOW_MS...', 'Install express-rate-limit...', 'Implement InMemoryRateLimitStore...', 'Write unit tests for rateLimiter middleware...', 'Register rateLimiter middleware...', etc."
+    },
+    {
+      "text": "Documents address the specific requirements: 1000 req/hour limit, 429 error responses, and a usage-check mechanism",
+      "passed": true,
+      "evidence": "All three specifics are covered: (1) '1,000 requests per rolling hour' stated in HLD overview and enforced throughout; (2) HTTP 429 responses with full JSON body and Retry-After header detailed in LLD section 4 and EARS FR-4/FR-5/FR-6; (3) GET /v1/usage endpoint described as 'allows clients (and operators) to query current usage' (line 10) with full request/response spec in LLD section 4."
+    },
+    {
+      "text": "LLD includes discussion of rate-limiting algorithm (e.g. sliding window, token bucket, fixed window) with data structure details",
+      "passed": true,
+      "evidence": "LLD section 4 (Key Design Decisions) explicitly discusses the algorithm choice: 'Window algorithm: Fixed window (per-hour bucket)' with rationale comparing to sliding window. Data structure details are provided in section 2: 'In-memory store entry (managed internally by express-rate-limit): { totalHits: 42, resetTime: Date }' and pseudocode in section 3 shows the Map-based store operations."
+    },
+    {
+      "text": "Implementation Plan includes a risk assessment section with at least 2 risks identified",
+      "passed": true,
+      "evidence": "Section 4.4 'Risk Assessment' contains a table with four distinct risks: (1) in-memory store resets on deploy causing burst traffic, (2) fixed-window boundary burst (2x requests at window edge), (3) express-rate-limit API breaks between major versions, (4) incorrect middleware ordering exposes routes without rate limiting — all with Likelihood, Impact, and Mitigation columns."
+    }
+  ]
+}

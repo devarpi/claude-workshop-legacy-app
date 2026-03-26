@@ -1,0 +1,37 @@
+{
+  "eval_id": 2,
+  "eval_name": "csv-export",
+  "prompt": "I need to add an export to CSV feature for our analytics dashboard. Users have been asking for this for months. They should be able to select a date range, pick which metrics they want exported, and download a CSV file. We have a lot of data — some exports could have millions of rows — so it needs to handle large exports gracefully, probably with async processing and an email link when ready.",
+  "assertions": [
+    {
+      "id": "has-all-four-sections",
+      "text": "Output contains all four required sections: HLD, LLD, EARS requirements plan, and Implementation Plan",
+      "type": "structural"
+    },
+    {
+      "id": "ears-numbered-requirements",
+      "text": "EARS section contains numbered requirements using proper EARS syntax (WHEN/WHILE/IF THEN/The system shall)",
+      "type": "format"
+    },
+    {
+      "id": "async-job-architecture",
+      "text": "HLD or LLD addresses the async job/queue architecture for handling large exports (not synchronous download)",
+      "type": "content"
+    },
+    {
+      "id": "large-export-handling",
+      "text": "Documents address the large data concern (millions of rows) with specific strategies like streaming, chunking, or background jobs",
+      "type": "content"
+    },
+    {
+      "id": "email-delivery-covered",
+      "text": "Implementation plan or LLD covers email notification/link delivery when the export is ready",
+      "type": "content"
+    },
+    {
+      "id": "definition-of-done",
+      "text": "Implementation Plan includes a 'Definition of Done' section with completion criteria checklist",
+      "type": "format"
+    }
+  ]
+}
