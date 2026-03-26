@@ -16,7 +16,9 @@
       "Bash(cp -r ~/.claude/skills/create-branch /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
       "Bash(cp -rf ~/.claude/skills/enhancement-planner /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
       "Bash(cp -rf ~/.claude/skills/enhancement-planner-workspace /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
