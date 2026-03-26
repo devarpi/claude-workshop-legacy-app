@@ -1,16 +1,18 @@
-const AWS = require('aws-sdk');
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
 
 // Hardcoded credentials - intentional vulnerability (CWE-798)
 const JWT_SECRET = 'supersecret123';
 
-AWS.config.update({
+const dynamodb = new DynamoDBClient({
   region: 'us-east-1',
-  accessKeyId: 'fakeAccessKeyId',
-  secretAccessKey: 'fakeSecretAccessKey',
+  credentials: {
+    accessKeyId: 'fakeAccessKeyId',
+    secretAccessKey: 'fakeSecretAccessKey'
+  },
   endpoint: process.env.DYNAMO_ENDPOINT || 'http://localhost:8010'
 });
 
-const dynamodb = new AWS.DynamoDB();
-const docClient = new AWS.DynamoDB.DocumentClient();
+const docClient = DynamoDBDocumentClient.from(dynamodb);
 
 module.exports = { dynamodb, docClient, JWT_SECRET };

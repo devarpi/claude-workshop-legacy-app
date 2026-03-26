@@ -1,6 +1,6 @@
 # Legacy Shop App
 
-A deliberately vulnerable Node.js 14 web application for security workshop use. Participants practice identifying and exploiting common web vulnerabilities in a safe, local environment.
+A deliberately vulnerable Node.js 22 web application for security workshop use. Participants practice identifying and exploiting common web vulnerabilities in a safe, local environment.
 
 ---
 
@@ -8,7 +8,7 @@ A deliberately vulnerable Node.js 14 web application for security workshop use. 
 
 | Component | Technology | Port |
 |---|---|---|
-| Web App + API | Node.js 14, Express 4.17.1 | 3000 |
+| Web App + API | Node.js 22, Express 4.21.x | 3000 |
 | Database | DynamoDB Local (Amazon) | 8010 |
 | Database Admin UI | DynamoDB Admin (aaronshaf) | 8011 |
 
@@ -262,7 +262,7 @@ legacy-app/
 ├── server.js                # HTTP server bootstrap
 ├── Makefile                 # start / stop / init commands
 ├── docker-compose.yml       # DynamoDB Local + Admin containers
-├── package.json             # Node 14 engine, pinned vulnerable deps
+├── package.json             # Node 22 engine, updated deps
 ├── config/
 │   └── db.js                # DynamoDB client, hardcoded JWT secret
 ├── middleware/

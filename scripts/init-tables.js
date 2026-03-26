@@ -1,4 +1,5 @@
 const { dynamodb } = require('../config/db');
+const { CreateTableCommand } = require('@aws-sdk/client-dynamodb');
 
 const createUsersTable = () => {
   const params = {
@@ -17,7 +18,7 @@ const createUsersTable = () => {
     BillingMode: 'PAY_PER_REQUEST'
   };
 
-  return dynamodb.createTable(params).promise();
+  return dynamodb.send(new CreateTableCommand(params));
 };
 
 const createOrdersTable = () => {
@@ -37,7 +38,7 @@ const createOrdersTable = () => {
     BillingMode: 'PAY_PER_REQUEST'
   };
 
-  return dynamodb.createTable(params).promise();
+  return dynamodb.send(new CreateTableCommand(params));
 };
 
 (async () => {
@@ -45,7 +46,7 @@ const createOrdersTable = () => {
     await createUsersTable();
     console.log('Users table created');
   } catch (err) {
-    if (err.code === 'ResourceInUseException') {
+    if (err.name === 'ResourceInUseException') {
       console.log('Users table already exists');
     } else {
       console.error('Error creating Users table:', err.message);
@@ -56,7 +57,7 @@ const createOrdersTable = () => {
     await createOrdersTable();
     console.log('Orders table created');
   } catch (err) {
-    if (err.code === 'ResourceInUseException') {
+    if (err.name === 'ResourceInUseException') {
       console.log('Orders table already exists');
     } else {
       console.error('Error creating Orders table:', err.message);

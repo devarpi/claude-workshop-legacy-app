@@ -1,4 +1,4 @@
-.PHONY: start stop restart init seed data logs help
+.PHONY: start stop restart reinit init seed data logs help
 
 start: ## Start DynamoDB local + admin, init tables, auto-seed if empty, run the app
 	docker compose up -d
@@ -21,6 +21,13 @@ data: ## View current data in DynamoDB
 
 app: ## Run the web app + API server
 	node server.js
+
+reinit: ## Full reset — restart infra, wipe and recreate tables, reseed fresh data
+	docker compose down
+	docker compose up -d
+	sleep 2
+	node scripts/init-tables.js
+	node scripts/seed.js
 
 stop: ## Stop Docker containers
 	docker compose down

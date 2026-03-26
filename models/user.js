@@ -1,5 +1,6 @@
 const { docClient } = require('../config/db');
-const uuidv4 = require('uuid/v4');
+const { PutCommand, QueryCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
+const { v4: uuidv4 } = require('uuid');
 
 const TABLE = 'Users';
 
@@ -13,7 +14,7 @@ const create = (data) => {
     createdAt: new Date().toISOString()
   };
 
-  return docClient.put({ TableName: TABLE, Item: user }).promise()
+  return docClient.send(new PutCommand({ TableName: TABLE, Item: user }))
     .then(() => user);
 };
 
@@ -26,12 +27,12 @@ const findByUsername = (username) => {
     ExpressionAttributeValues: { ':username': username }
   };
 
-  return docClient.query(params).promise()
+  return docClient.send(new QueryCommand(params))
     .then(result => result.Items[0] || null);
 };
 
 const findById = (userId) => {
-  return docClient.get({ TableName: TABLE, Key: { userId } }).promise()
+  return docClient.send(new GetCommand({ TableName: TABLE, Key: { userId } }))
     .then(result => result.Item || null);
 };
 

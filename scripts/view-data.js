@@ -1,7 +1,8 @@
 const { docClient } = require('../config/db');
+const { ScanCommand } = require('@aws-sdk/lib-dynamodb');
 
 const scan = (table) =>
-  docClient.scan({ TableName: table }).promise().then(r => r.Items);
+  docClient.send(new ScanCommand({ TableName: table })).then(r => r.Items);
 
 const printUsers = (users) => {
   console.log(`\n  USERS  (${users.length} records)\n`);

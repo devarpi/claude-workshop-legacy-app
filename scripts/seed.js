@@ -1,5 +1,6 @@
 const { docClient } = require('../config/db');
-const uuidv4 = require('uuid/v4');
+const { PutCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
+const { v4: uuidv4 } = require('uuid');
 
 const users = [
   { username: 'alice',  email: 'alice@example.com',  password: 'password123', role: 'user'  },
@@ -17,7 +18,7 @@ const orderTemplates = [
 ];
 
 const isEmpty = async () => {
-  const result = await docClient.scan({ TableName: 'Users', Limit: 1 }).promise();
+  const result = await docClient.send(new ScanCommand({ TableName: 'Users', Limit: 1 }));
   return result.Count === 0;
 };
 
@@ -32,7 +33,7 @@ const seedUsers = async () => {
       role:      u.role,
       createdAt: new Date().toISOString(),
     };
-    await docClient.put({ TableName: 'Users', Item: user }).promise();
+    await docClient.send(new PutCommand({ TableName: 'Users', Item: user }));
     created.push(user);
   }
   return created;
@@ -53,7 +54,7 @@ const seedOrders = async (seededUsers) => {
         status:    i === 0 ? 'complete' : 'pending',
         createdAt: new Date(Date.now() - i * 86400000).toISOString(),
       };
-      await docClient.put({ TableName: 'Orders', Item: order }).promise();
+      await docClient.send(new PutCommand({ TableName: 'Orders', Item: order }));
       created.push({ username: user.username, ...order });
     }
   }

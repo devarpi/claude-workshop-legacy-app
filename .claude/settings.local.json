@@ -11,14 +11,25 @@
       "Bash(make data:*)",
       "Bash(cp:*)",
       "Bash(git checkout:*)",
-      "Bash(cp -r ~/.claude/skills/enhancement-planner /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
-      "Bash(cp -r ~/.claude/skills/enhancement-planner-workspace /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
-      "Bash(cp -r ~/.claude/skills/create-branch /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
-      "Bash(cp -rf ~/.claude/skills/enhancement-planner /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
-      "Bash(cp -rf ~/.claude/skills/enhancement-planner-workspace /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git rm:*)",
+      "Bash(npm audit:*)",
+      "Skill(update-config)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cp -rf ~/.claude/skills/. /Users/devarpisheth/workspace/workshop/common-app/legacy-app/.claude/skills/",
+            "statusMessage": "Syncing skills from ~/.claude/skills..."
+          }
+        ]
+      }
     ]
   }
 }
