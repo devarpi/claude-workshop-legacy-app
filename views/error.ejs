@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error - Legacy Shop</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Legacy Shop</h1>
+    <div class="card">
+      <h2>Error</h2>
+      <div class="alert error">
+        <!-- Stack trace exposed to user - intentional vulnerability (CWE-209) -->
+        <strong><%= error %></strong>
+        <% if (stack) { %>
+          <pre><%= stack %></pre>
+        <% } %>
+      </div>
+      <a href="/" class="btn">Go Home</a>
+    </div>
+  </div>
+</body>
+</html>

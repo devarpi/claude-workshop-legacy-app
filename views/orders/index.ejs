@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders - Legacy Shop</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Legacy Shop</h1>
+      <div>
+        <span>Welcome, <%= username %></span>
+        <a href="/orders/new" class="btn">+ New Order</a>
+        <a href="/logout" class="btn btn-outline">Logout</a>
+      </div>
+    </div>
+
+    <h2>My Orders</h2>
+
+    <% if (orders.length === 0) { %>
+      <p>No orders yet. <a href="/orders/new">Place your first order</a></p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td><code><%= order.orderId %></code></td>
+              <!-- Unescaped rendering - intentional XSS vulnerability (CWE-79) -->
+              <td><%- order.item %></td>
+              <td><%= order.quantity %></td>
+              <td>$<%= order.price %></td>
+              <td><span class="badge"><%= order.status %></span></td>
+              <td><%= new Date(order.createdAt).toLocaleDateString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</body>
+</html>

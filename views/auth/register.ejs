@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Legacy Shop</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Legacy Shop</h1>
+    <div class="card">
+      <h2>Register</h2>
+      <% if (error) { %>
+        <div class="alert error"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/register">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Register</button>
+      </form>
+      <p><a href="/login">Already have an account? Login</a></p>
+    </div>
+  </div>
+</body>
+</html>

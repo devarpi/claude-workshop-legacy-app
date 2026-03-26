@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Order - Legacy Shop</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Legacy Shop</h1>
+      <div>
+        <a href="/orders" class="btn btn-outline">Back to Orders</a>
+        <a href="/logout" class="btn btn-outline">Logout</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Place New Order</h2>
+      <% if (error) { %>
+        <div class="alert error"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/orders">
+        <div class="form-group">
+          <label>Item Name</label>
+          <input type="text" name="item" placeholder="e.g. Widget Pro" required>
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" name="quantity" value="1" required>
+        </div>
+        <div class="form-group">
+          <label>Price ($)</label>
+          <!-- Price accepted from client - intentional vulnerability -->
+          <input type="number" name="price" step="0.01" value="9.99" required>
+        </div>
+        <button type="submit" class="btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

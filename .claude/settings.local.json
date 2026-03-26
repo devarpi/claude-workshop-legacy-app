@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker ps:*)",
+      "Bash(node scripts/init-tables.js)",
+      "Bash(pkill -f \"node server.js\")",
+      "Bash(make help:*)",
+      "Bash(node:*)",
+      "Bash(make data:*)"
+    ]
+  }
+}
